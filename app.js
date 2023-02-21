@@ -1,7 +1,7 @@
 var path = require('path');
 
 var apos = require('apostrophe')({
-  shortName: 'material-cms',
+  shortName: 'material-cms-pro',
   modules: {
     // Lean frontend
     'apostrophe-assets': {
@@ -201,8 +201,35 @@ var apos = require('apostrophe')({
     'apostrophe-forms-boolean-field-widgets': {},
     'apostrophe-forms-conditional-widgets': {},
     // Templates
-    'apostrophe-templates': { viewsFolderFallback: path.join(__dirname, 'views') }
-
+    'apostrophe-templates': { viewsFolderFallback: path.join(__dirname, 'views') },
+    // Apostrophe Workflow module
+    'apostrophe-workflow': {
+      locales: [
+        {
+          name: 'default',
+          label: 'Deutsch',
+          children: [
+            {
+              name: 'en-gb',
+              label: 'England'
+            },
+            {
+              name: 'fr',
+              label: 'Frankreich'
+            },
+            {
+              name: 'sp',
+              label: 'Spanien'
+            },
+          ]
+        },
+      ],
+      exportAfterCommit: false,
+      defaultLocale: 'de-de',
+      alias: 'workflow',
+      replicateAcrossLocales: false
+    },
+    'apostrophe-workflow-modified-documents': {}
   // << End of Modules
   }
 });
