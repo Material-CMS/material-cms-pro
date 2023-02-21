@@ -1,0 +1,40 @@
+// Language Dropdown
+.language-dropdown {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  min-width: 64px;
+  height: 64px;
+  .dropdown-trigger {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    display: block;
+  }
+  .dropdown-content {
+    width: 120px !important;
+    left: -50% !important;
+    transform: translate(3%) !important;
+    li {
+      text-align: center;
+    }
+  }
+}
+.language-dropdown.mobile {
+  bottom: 64px;
+  .dropdown-content {
+    top: -60px !important;
+    width: 120px !important;
+  }
+}
+.language {
+  .flex();
+	.flex-align-items(center);
+	.flex-justify(center);
+  height: 100%;
+  width: 100%;
+  svg {
+    width: 50%;
+    height: 50%;
+  }
+}

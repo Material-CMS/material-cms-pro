@@ -25,6 +25,7 @@
     "apostrophe-rich-text-permalinks": "^2.0.5",
     "apostrophe-seo": "^1.6.0",
     "apostrophe-site-map": "^2.8.0",
+    "apostrophe-workflow": "^2.40.2",
     "html-minifier": "^4.0.0",
     "mozjpeg": "^7.1.1",
     "redis": "^3.1.2"

@@ -69,13 +69,41 @@
         <svg class="hamburger accent-color"
           xmlns="http://www.w3.org/2000/svg"
           height="24px"
-          viewBox="0 0 24 24"
           width="24px"
+          viewBox="0 0 24 24"
         >
           <path d="M0 0h24v24H0z" fill="none" />
           <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
         </svg>
       </a>
+
+      {# Include Language Menu #}
+      <div class="language-dropdown hide-on-med-and-down">
+        <a class='dropdown-trigger waves-effect' href='#' data-target='language-desktop'>
+          <i class="language">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="48px"
+              width="48px"
+              viewBox="0 96 960 960">
+              <path d="m475 976 181-480h82l186 480h-87l-41-126H604l-47
+                      126h-82Zm151-196h142l-70-194h-2l-70 194Zm-466 76-55-55
+                      204-204q-38-44-67.5-88.5T190 416h87q17 33 37.5 62.5T361
+                      539q45-47 75-97.5T487 336H40v-80h280v-80h80v80h280v80H567q-22 69-58.5
+                      135.5T419 598l98 99-30 81-127-122-200 200Z"
+                    {% if data.widget.navTextColor %}
+                      fill="{{ data.widget.navTextColor }}"
+                    {% endif %}
+              />
+            </svg>
+          </i>
+        </a>
+        <ul id='language-desktop' class='dropdown-content'>
+          {% for localization in apos.workflow.localizations() %}
+            <li><a href="{{ localization._url | build({ workflowLocale: localization.workflowLocale }) }}">{{ localization.label }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
 
       <ul class="nav-activator right hide-on-med-and-down">
 
@@ -134,5 +162,33 @@
       <p class="flow-text">no navigation<p>
     </div>
   {% endif %}
+
+  {# Include Language Menu #}
+  <div class="language-dropdown mobile">
+    <a class='dropdown-trigger waves-effect' href='#' data-target='language-mobile'>
+      <i class="language">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="48px"
+          width="48px"
+          viewBox="0 96 960 960">
+          <path d="m475 976 181-480h82l186 480h-87l-41-126H604l-47
+                  126h-82Zm151-196h142l-70-194h-2l-70 194Zm-466 76-55-55
+                  204-204q-38-44-67.5-88.5T190 416h87q17 33 37.5 62.5T361
+                  539q45-47 75-97.5T487 336H40v-80h280v-80h80v80h280v80H567q-22 69-58.5
+                  135.5T419 598l98 99-30 81-127-122-200 200Z"
+                {% if data.widget.navTextColor %}
+                  fill="{{ data.widget.navTextColor }}"
+                {% endif %}
+          />
+        </svg>
+      </i>
+    </a>
+    <ul id='language-mobile' class='dropdown-content'>
+      {% for localization in apos.workflow.localizations() %}
+        <li><a href="{{ localization._url | build({ workflowLocale: localization.workflowLocale }) }}">{{ localization.label }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
 
 </ul>
