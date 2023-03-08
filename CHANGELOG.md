@@ -24,9 +24,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Form send button not using button color
+- Rewrite texts-pages function to pure javascript
+- Improve materialboxed animation
 
-
-## [0.9.8 ] - Unreleased
+## [0.9.8 ] - 08.03.2023
 
 ### Added
 - Video local files
@@ -38,12 +39,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Shape dividers as SVG & shape divider path array
 - Text justify for texts and people
 - Call to action button as widget
+- Rewrite jquery dependent functions
+- New lightbox function
+- New expand function
 
 ### Fixed
 - Specific page script context
+- Improved anchor-scroll function
 
 ### Removed
 - Unnecessary styles from apostrophe-rich-texts
+- Jquery library for lean mode
 
 ## [0.9.7 ] - 29.05.2021
 
