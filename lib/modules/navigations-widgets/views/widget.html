@@ -98,7 +98,7 @@
             </svg>
           </i>
         </a>
-        <ul id='language-desktop' class='dropdown-content'>
+        <ul id='language-desktop' class='dropdown-content nav-color'>
           {% for localization in apos.workflow.localizations() %}
             <li><a href="{{ localization._url | build({ workflowLocale: localization.workflowLocale }) }}">{{ localization.label }}</a></li>
           {% endfor %}
@@ -184,7 +184,7 @@
         </svg>
       </i>
     </a>
-    <ul id='language-mobile' class='dropdown-content'>
+    <ul id='language-mobile' class='dropdown-content nav-color'>
       {% for localization in apos.workflow.localizations() %}
         <li><a href="{{ localization._url | build({ workflowLocale: localization.workflowLocale }) }}">{{ localization.label }}</a></li>
       {% endfor %}
