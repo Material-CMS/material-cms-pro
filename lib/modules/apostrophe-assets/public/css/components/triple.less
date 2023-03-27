@@ -13,7 +13,7 @@
        .apos-area-widget-wrapper {
          border-radius: inherit;
          flex-grow: 1;
-         margin-bottom: 1.8rem;
+         // margin-bottom: 1.8rem;
          .apos-area-widget {
            border-radius: inherit;
            height: 100%;
@@ -43,13 +43,24 @@
        }
      }
    }
+   .columns-container.left {
+     padding-right: 0.75rem;
+   }
+   .columns-container.middle {
+     padding-left: 0.75rem;
+     padding-right: 0.75rem;
+   }
+   .columns-container.right {
+     padding-left: 0.75rem;
+   }
 }
 // Glue widgets override
 .widgets-container.glue-container {
   .row.columns.triple {
     .columns-container.left {
       padding: 0 !important;
-      .apos-area-widget-wrapper {
+      .apos-area-widget-wrapper,
+      .row.widget {
         margin-bottom: 0;
       }
       .apos-area-widget-wrapper:nth-child(-n+1) .radius {
@@ -74,7 +85,8 @@
     }
     .columns-container.middle {
       padding: 0 !important;
-      .apos-area-widget-wrapper {
+      .apos-area-widget-wrapper,
+      .row.widget {
         margin-bottom: 0;
       }
       .apos-area-widget-wrapper:nth-child(-n+1) .radius {
@@ -88,7 +100,8 @@
     }
     .columns-container.right {
       padding: 0 !important;
-      .apos-area-widget-wrapper {
+      .apos-area-widget-wrapper,
+      .row.widget {
         margin-bottom: 0;
       }
       .apos-area-widget-wrapper:nth-child(-n+1) .radius {
@@ -117,7 +130,8 @@
   .row.columns.triple {
     .columns-container.left {
       padding: 0 !important;
-      .apos-area-widget-wrapper {
+      .apos-area-widget-wrapper,
+      .row.widget {
         margin-bottom: 0;
       }
       .apos-area-widget-wrapper .radius {
@@ -142,7 +156,8 @@
     }
     .columns-container.middle {
       padding: 0 !important;
-      .apos-area-widget-wrapper {
+      .apos-area-widget-wrapper,
+      .row.widget {
         margin-bottom: 0;
       }
       .apos-area-widget-wrapper:nth-child(-n+1) .radius {
@@ -156,7 +171,8 @@
     }
     .columns-container.right {
       padding: 0 !important;
-      .apos-area-widget-wrapper {
+      .apos-area-widget-wrapper,
+      .row.widget {
         margin-bottom: 0;
       }
       .apos-area-widget-wrapper .radius {
@@ -187,6 +203,10 @@
     display: block;
     .columns-container {
       width: 100%;
+      padding: 0 !important;
+      .apos-area-widget-wrapper{
+        margin-bottom: 1.8rem;
+      }
     }
   }
   // Glue widgets override
