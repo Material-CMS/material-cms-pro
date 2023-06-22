@@ -64,46 +64,57 @@
     </a>
 
       {# Sidenav Trigger #}
-      <a aria-label="Open sidenav" href="#" data-target="mobile" class="accent-color sidenav-trigger">
-        {# <i class="material-icons">menu</i> #}
-        <svg class="hamburger accent-color"
-          xmlns="http://www.w3.org/2000/svg"
-          height="24px"
-          width="24px"
-          viewBox="0 0 24 24"
-        >
-          <path d="M0 0h24v24H0z" fill="none" />
-          <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
-        </svg>
-      </a>
+      {% if data.page.orphan or data.piece %}
+        <a href="javascript:history.back()" class="flow-text waves-effect hide-on-large-only go-back">
 
-      {# Include Language Menu #}
-      <div class="language-dropdown hide-on-med-and-down">
-        <a class='dropdown-trigger waves-effect' href='#' data-target='language-desktop'>
-          <i class="language">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="48px"
-              width="48px"
-              viewBox="0 96 960 960">
-              <path d="m475 976 181-480h82l186 480h-87l-41-126H604l-47
-                      126h-82Zm151-196h142l-70-194h-2l-70 194Zm-466 76-55-55
-                      204-204q-38-44-67.5-88.5T190 416h87q17 33 37.5 62.5T361
-                      539q45-47 75-97.5T487 336H40v-80h280v-80h80v80h280v80H567q-22 69-58.5
-                      135.5T419 598l98 99-30 81-127-122-200 200Z"
-                    {% if data.widget.navTextColor %}
-                      fill="{{ data.widget.navTextColor }}"
-                    {% endif %}
-              />
+          <i class="material-icons center">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24">
+              <path d="M480 896 160 576l320-320 57 56-224 224h487v80H313l224 224-57 56Z"/>
             </svg>
           </i>
         </a>
-        <ul id='language-desktop' class='dropdown-content nav-color'>
-          {% for localization in apos.workflow.localizations() %}
-            <li><a href="{{ localization._url | build({ workflowLocale: localization.workflowLocale }) }}">{{ localization.label }}</a></li>
-          {% endfor %}
-        </ul>
-      </div>
+      {% else %}
+        <a aria-label="Open sidenav" href="#" data-target="mobile" class="accent-color sidenav-trigger">
+          {# <i class="material-icons">menu</i> #}
+          <svg class="hamburger accent-color"
+            xmlns="http://www.w3.org/2000/svg"
+            height="24px"
+            width="24px"
+            viewBox="0 0 24 24"
+          >
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </a>
+
+        {# Include Language Menu #}
+        <div class="language-dropdown hide-on-med-and-down">
+          <a class='dropdown-trigger waves-effect' href='#' data-target='language-desktop'>
+            <i class="language">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="48px"
+                width="48px"
+                viewBox="0 96 960 960">
+                <path d="m475 976 181-480h82l186 480h-87l-41-126H604l-47
+                        126h-82Zm151-196h142l-70-194h-2l-70 194Zm-466 76-55-55
+                        204-204q-38-44-67.5-88.5T190 416h87q17 33 37.5 62.5T361
+                        539q45-47 75-97.5T487 336H40v-80h280v-80h80v80h280v80H567q-22 69-58.5
+                        135.5T419 598l98 99-30 81-127-122-200 200Z"
+                      {% if data.widget.navTextColor %}
+                        fill="{{ data.widget.navTextColor }}"
+                      {% endif %}
+                />
+              </svg>
+            </i>
+          </a>
+          <ul id='language-desktop' class='dropdown-content nav-color'>
+            {% for localization in apos.workflow.localizations() %}
+              <li><a href="{{ localization._url | build({ workflowLocale: localization.workflowLocale }) }}">{{ localization.label }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
 
       <ul class="nav-activator right hide-on-med-and-down">
 
@@ -111,15 +122,28 @@
         {% include "components/extra-links.html" %}
 
         {# Include Nav #}
-        {% if data.widget.nav == 'default' %}
-          {{ automatic.base('dropdown-desktop','dropdown-trigger-hover', '') }}
-        {% elif data.widget.nav == 'manual' and data.widget._pieces.length %}
-          {{ manual.base('dropdown-desktop','dropdown-trigger-hover') }}
+        {% if data.page.orphan or data.piece %}
+          <li>
+            <a href="javascript:history.back()" class="flow-text waves-effect go-back">
+              <i class="material-icons left">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24">
+                  <path d="M480 896 160 576l320-320 57 56-224 224h487v80H313l224 224-57 56Z"/>
+                </svg>
+              </i>
+              {{ navGoBack or 'Back' }}
+            </a>
+          </li>
         {% else %}
-          <div class="apos-area apos-empty">
-            <i class="material-icons">clear</i>
-            <p class="flow-text">no navigation<p>
-          </div>
+          {% if data.widget.nav == 'default' %}
+            {{ automatic.base('dropdown-desktop','dropdown-trigger-hover', '') }}
+          {% elif data.widget.nav == 'manual' and data.widget._pieces.length %}
+            {{ manual.base('dropdown-desktop','dropdown-trigger-hover') }}
+          {% else %}
+            <div class="apos-area apos-empty">
+              <i class="material-icons">clear</i>
+              <p class="flow-text">no navigation<p>
+            </div>
+          {% endif %}
         {% endif %}
 
       </ul>
@@ -130,65 +154,67 @@
 </div>
 
 {# Mobile Sidenav #}
-<ul id="mobile"
-  class="sidenav nav-color
-    {% if data.widget.navTextColor %}
-      nav-text-color
-    {% endif %}"
-
-  {% if data.widget.navColor or data.widget.navTextColor %}
-    style="
-      {% if data.widget.navColor %}
-        background-color: {{ data.widget.navColor }} !important;
-      {% endif %}
+{% if not data.page.orphan or data.piece %}
+  <ul id="mobile"
+    class="sidenav nav-color
       {% if data.widget.navTextColor %}
-        color: {{ data.widget.navTextColor }};
-      {% endif %}
-    "
-  {% endif %}
->
+        nav-text-color
+      {% endif %}"
 
-  {# Extra Links #}
-  {% include "components/extra-links.html" %}
+    {% if data.widget.navColor or data.widget.navTextColor %}
+      style="
+        {% if data.widget.navColor %}
+          background-color: {{ data.widget.navColor }} !important;
+        {% endif %}
+        {% if data.widget.navTextColor %}
+          color: {{ data.widget.navTextColor }};
+        {% endif %}
+      "
+    {% endif %}
+  >
 
-  {# Include Nav #}
-  {% if data.widget.nav == 'default' %}
-    {{ automatic.base('dropdown-mobile','dropdown-trigger', 'sidenav-close') }}
-  {% elif data.widget.nav == 'manual' and data.widget._pieces.length  %}
-    {{ manual.base('dropdown-mobile','dropdown-trigger', 'sidenav-close') }}
-  {% else %}
-    <div class="apos-area apos-empty">
-      <i class="material-icons">clear</i>
-      <p class="flow-text">no navigation<p>
+    {# Extra Links #}
+    {% include "components/extra-links.html" %}
+
+    {# Include Nav #}
+    {% if data.widget.nav == 'default' %}
+      {{ automatic.base('dropdown-mobile','dropdown-trigger', 'sidenav-close') }}
+    {% elif data.widget.nav == 'manual' and data.widget._pieces.length  %}
+      {{ manual.base('dropdown-mobile','dropdown-trigger', 'sidenav-close') }}
+    {% else %}
+      <div class="apos-area apos-empty">
+        <i class="material-icons">clear</i>
+        <p class="flow-text">no navigation<p>
+      </div>
+    {% endif %}
+
+    {# Include Language Menu #}
+    <div class="language-dropdown mobile">
+      <a class='dropdown-trigger waves-effect' href='#' data-target='language-mobile'>
+        <i class="language">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="48px"
+            width="48px"
+            viewBox="0 96 960 960">
+            <path d="m475 976 181-480h82l186 480h-87l-41-126H604l-47
+                    126h-82Zm151-196h142l-70-194h-2l-70 194Zm-466 76-55-55
+                    204-204q-38-44-67.5-88.5T190 416h87q17 33 37.5 62.5T361
+                    539q45-47 75-97.5T487 336H40v-80h280v-80h80v80h280v80H567q-22 69-58.5
+                    135.5T419 598l98 99-30 81-127-122-200 200Z"
+                  {% if data.widget.navTextColor %}
+                    fill="{{ data.widget.navTextColor }}"
+                  {% endif %}
+            />
+          </svg>
+        </i>
+      </a>
+      <ul id='language-mobile' class='dropdown-content nav-color'>
+        {% for localization in apos.workflow.localizations() %}
+          <li><a href="{{ localization._url | build({ workflowLocale: localization.workflowLocale }) }}">{{ localization.label }}</a></li>
+        {% endfor %}
+      </ul>
     </div>
-  {% endif %}
 
-  {# Include Language Menu #}
-  <div class="language-dropdown mobile">
-    <a class='dropdown-trigger waves-effect' href='#' data-target='language-mobile'>
-      <i class="language">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="48px"
-          width="48px"
-          viewBox="0 96 960 960">
-          <path d="m475 976 181-480h82l186 480h-87l-41-126H604l-47
-                  126h-82Zm151-196h142l-70-194h-2l-70 194Zm-466 76-55-55
-                  204-204q-38-44-67.5-88.5T190 416h87q17 33 37.5 62.5T361
-                  539q45-47 75-97.5T487 336H40v-80h280v-80h80v80h280v80H567q-22 69-58.5
-                  135.5T419 598l98 99-30 81-127-122-200 200Z"
-                {% if data.widget.navTextColor %}
-                  fill="{{ data.widget.navTextColor }}"
-                {% endif %}
-          />
-        </svg>
-      </i>
-    </a>
-    <ul id='language-mobile' class='dropdown-content nav-color'>
-      {% for localization in apos.workflow.localizations() %}
-        <li><a href="{{ localization._url | build({ workflowLocale: localization.workflowLocale }) }}">{{ localization.label }}</a></li>
-      {% endfor %}
-    </ul>
-  </div>
-
-</ul>
+  </ul>
+{% endif %}

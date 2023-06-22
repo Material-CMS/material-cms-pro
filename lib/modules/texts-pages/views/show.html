@@ -4,7 +4,7 @@
 
 {% block main %}
 
-  <div class="main-content">
+  <div class="main-content bg-color">
     <div class="pages-container">
       <div class="container">
 
@@ -22,13 +22,10 @@
                 {% else %}
                   horizontal
                 {% endif %}"
-                {% if data.piece.backColor %}
-                  style="background-color:{{ data.piece.backColor }}"
-                {% endif %}
               >
 
                 {% if data.piece.blog %}
-                  {% if data.piece.topImage.items[0] %}
+                  {% if data.piece.topImage.items.length %}
                     <div class="card-image">
                       {{ apos.area(data.piece, 'topImage', {
                         edit: false,
@@ -43,10 +40,9 @@
                       }) }}
                     </div>
                   {% endif %}
-                {% endif %}
 
-                {% if not data.piece.blog %}
-                  {% if data.piece.sideImage.items[0] %}
+                {% else %}
+                  {% if data.piece.sideImage.items.length %}
                     <div class="row">
                       <div class="height-100 col s12 m3">
                         <div class="card-image">
@@ -66,13 +62,13 @@
                     {% endif %}
                   {% endif %}
 
-                  {% if data.piece.sideImage.items[0] %}
+                  {% if data.piece.sideImage.items.length %}
                     <div class="height-100 col s12 m9">
                     {% endif %}
 
-                    <div class="card-stacked">
+                    <div class="card-stacked" {% if data.piece.backColor %} style="background-color:{{ data.piece.backColor }}" {% endif %}>
 
-                      <div class="card-content" {% if data.piece.backColor %} style="background-color:{{ data.piece.backColor }}" {% endif %}>
+                      <div class="card-content">
 
                         {% if data.piece.title %}
                           <h4 class="accent-color card-title" {% if data.piece.titleColor %} style="color:{{ data.piece.titleColor }}" {% endif %}>
@@ -80,7 +76,13 @@
                           </h4>
                         {% endif %}
 
-                        {% if data.piece.text.items[0] %}
+                        {% if data.piece.description.items.length %}
+                          {{ apos.area(data.piece, 'description', { edit: false }) }}
+                        {% endif %}
+
+                        <br/>
+
+                        {% if data.piece.text.items.length %}
                           {{ apos.area(data.piece, 'text', {
                             edit: false,
                             widgets: {
@@ -94,11 +96,6 @@
                               }
                             }
                           }) }}
-                        {% elif data.piece.description.items[0] %}
-                          {{ apos.area(data.piece, 'description', {
-                            edit: false,
-                            widgets: { 'apostrophe-rich-text': { } }
-                          }) }}
                         {% endif %}
 
                       </div>
@@ -106,21 +103,24 @@
                       <div class="card-action z-depth-0" {% if data.piece.backColor %} style="background-color:{{ data.piece.backColor }}" {% endif %}>
                         <div class="row">
 
-                          {% if data.piece.extraLink %}
-                            <div class="col s6">
-                              <a class="btn-flat" href="{{ data.piece.extraLink }}" target="_blank">
-                                {% if data.piece.linkText %}
-                                  {{ data.piece.linkText }}
-                                {% else %}
-                                  link
-                                {% endif %}
+                          {% if data.piece.linkArea.items.length %}
+                          {% set item = data.piece.linkArea.items[0] %}
+                            <div class="col s12{% if data.piece.blog %} m6 left-align{% else %} m12 center-align{% endif %}">
+                              <a
+                                class="btn-flat"
+                                href="{{ item.url or item._page._url }}"
+                                target="_blank"
+                                rel="noopener"
+                                style="color:{{ data.global.accentColor }}"
+                              >
+                                {{ item.label or item._page.title }}
                               </a>
                             </div>
                           {% endif %}
 
                           <div
                             class="right-align col
-                            {% if data.piece.extraLink %}
+                            {% if data.piece.linkArea.items[0] %}
                               s6
                             {% else %}
                               s12
@@ -132,7 +132,7 @@
                               {# Facebook share button #}
                               {{ button.svg(
                                 'Share On Facebook',
-                                'btn-radius btn-color',
+                                'btn-icon btn-radius btn-color',
                                 'https://www.facebook.com/sharer.php?u='+ data.piece._url | urlencode,
                                 'M0,0v455.73h242.704V279.691h-59.33v-71.864h59.33v-60.353c0-43.893,35.582-79.475,79.475-79.475h62.025v64.622h-44.382
                                   c-13.947,0-25.254,11.307-25.254,25.254v49.953h68.521l-9.47,71.864h-59.051V455.73H455.73V0H0z')
@@ -141,8 +141,8 @@
                               {# Pinterest share button #}
                               {{ button.svg(
                                 'Share On Pinterest',
-                                'btn-radius btn-color',
-                                'http://www.pinterest.com/pin/create/button/?url='+ data.piece._url | urlencode +'&media='+ apos.attachments.url(apos.images.first(data.piece.topImage), { size: data.options.size or 'full' }) | urlencode +'&description='+ apos.areas.plaintext(data.piece.description, { limit: '210' } ) | urlencode,
+                                'btn-icon btn-radius btn-color',
+                                'http://www.pinterest.com/pin/create/button/?url='+ data.piece._url | urlencode +'&media='+ (apos.attachments.url(apos.images.first(data.piece.topImage) , { size: 'full' }) if data.piece.topImage.items.length) | urlencode +'&description='+ apos.areas.plaintext(data.piece.description, { limit: '210' } ) | urlencode,
                                 'M0,0v455h455V0H0z M251.83,297.635c-19.57,0-37.973-10.516-44.227-22.557
                                   c0,0-10.516,41.691-12.71,49.78c-7.84,28.437-30.926,56.874-32.684,59.176c-1.229,1.649-4.013,1.105-4.324-1.026
                                   c-0.482-3.656-6.379-39.497,0.545-68.728c3.469-14.701,23.272-98.627,23.272-98.627s-5.771-11.543-5.771-28.624
@@ -156,7 +156,7 @@
                               {# LinkedIn share button #}
                               {{ button.svg(
                                 'Share On LinkedIn',
-                                'btn-radius btn-color',
+                                'btn-icon btn-radius btn-color',
                                 'https://www.linkedin.com/shareArticle?mini=true&url='+ data.piece._url | urlencode +'&title='+ data.piece.title | urlencode +'&summary='+ apos.areas.plaintext(data.piece.description, { limit: '210' } ) | urlencode +'&source='+ data.home._url | urlencode,
                                 'M0,0v455.731h455.731V0H0z M139.94,375.963c0,5.804-4.705,10.509-10.509,10.509H84.71c-5.804,0-10.509-4.705-10.509-10.509
                                   V185.18c0-5.804,4.705-10.509,10.509-10.509h44.721c5.804,0,10.509,4.705,10.509,10.509V375.963z M106.998,145.491
@@ -172,7 +172,7 @@
                               {# Twitter share button #}
                               {{ button.svg(
                                 'Share On Twitter',
-                                'btn-radius btn-color',
+                                'btn-icon btn-radius btn-color',
                                 'https://twitter.com/intent/tweet?url='+ data.piece._url | urlencode +'&text='+ apos.areas.plaintext(data.piece.description, { limit: '210' } ) | urlencode,
                                 'M0,0v455.731h455.731V0H0z M361.271,163.944c0.104,2.676,0.161,5.362,0.161,8.067c0,108.339-87.831,196.18-196.18,196.18
                                   c-38.568,0-74.545-11.132-104.875-30.368c-0.007-0.001-0.014-0.002-0.02-0.003l0.02,0.003c0,0,0,0,0,0
@@ -192,7 +192,7 @@
 
                     </div>
 
-                    {% if data.piece.sideImage.items[0] %}
+                    {% if data.piece.sideImage.items.length %}
                     </div>
                   </div>
                 {% endif %}

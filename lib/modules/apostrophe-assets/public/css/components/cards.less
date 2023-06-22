@@ -22,6 +22,7 @@
 			.transition(opacity, .5s, ease);
 	    width: 100%;
 	    h4 {
+        margin: 0;
 	      line-height: 2rem;
 	    }
 	  }
@@ -29,13 +30,18 @@
 			pointer-events: none;
 			touch-action: none;
 			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
+			bottom: 50%;
+      width: 100%;
+			transform: translate(0, -50%);
 			z-index: 4;
 			opacity: 0;
+      padding: 24px;
 			.transition(opacity, 1s, ease);
 		}
+    .click-action-link.bottom {
+      bottom: 0;
+      transform: translate(0);
+    }
 	}
 	.gradient-overlay:after {
 		content:'';
@@ -96,25 +102,6 @@
       }
     }
   }
-  .card-reveal {
-    width: 101%;
-    height: 101%;
-    background-color: inherit;
-    .material-icons.close {
-      position: absolute;
-      right: 32px;
-      top: 50px;
-      pointer-events: none;
-      touch-action: none;
-    }
-    h4 {
-      width: 90%;
-      margin: 0;
-      padding: 1.5rem 0;
-      pointer-events: none;
-      touch-action: none;
-    }
-  }
   .card-action {
 		background-color: transparent;
     margin: 0;
@@ -150,7 +137,7 @@
     cursor: pointer;
     position: relative;
     transform-origin: 0 100%;
-    .transition(height, .5s, ease);
+    .transition(height, .3s, ease);
   }
   .anime-overlay {
     position: fixed;
@@ -163,7 +150,7 @@
     bottom: 0;
     opacity: 0;
     background-color: rgba(0,0,0,0.5);
-    z-index: 2;
+    z-index: 4;
     cursor: pointer;
     .go-back {
       color: @white;
@@ -177,20 +164,21 @@
     }
   }
   .anime-container {
+    .transition(height, .3s, ease);
     position: absolute;
-    z-index: 3;
+    z-index: 5;
     top: 0;
     height: initial !important;
     transform: scale(0);
+    opacity: 0;
     padding-top: 0;
     .row.widget {
       margin-bottom: 0;
       .radius {
         max-height: 60vh;
         .card-content {
-          height: 100%;
-          margin: 10px;
           .transition(padding, .5s, ease);
+          height: 100%;
           .apos-area {
             max-height: 45vh;
             overflow-y: scroll;
@@ -201,8 +189,14 @@
   }
 }
 .col.anime.active {
-  max-height: 50vh;
+  .anime-overlay {
+    display: block;
+  }
   .anime-image {
-    z-index: 4;
+    height: 80% !important;
+    z-index: 6;
+  }
+  .anime-image.portrait {
+    height: 40% !important;
   }
 }

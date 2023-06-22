@@ -6,7 +6,7 @@
   }
   li {
     display: inline-block;
-    .transition(background-color, .2s, ease-in);
+    // .transition(background-color, .2s, ease-in);
   }
   // desktop and mobile nav hover colors
   .nav-color.dark-background {
@@ -77,6 +77,36 @@
   			position: fixed;
         width: 100%;
         height: 64px;
+        .sidenav-trigger {
+          margin: 0;
+          min-width: 15%;
+          .hamburger {
+            height: 100%;
+            margin-left: 18px;
+          }
+        }
+        .go-back {
+          .flex();
+          .flex-justify(center);
+        }
+        @media (max-width: 992px) {
+          .go-back, {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            min-width: 15%;
+          }
+          .sidenav-trigger,
+          .go-back, {
+            width: 15%;
+          }
+        }
+        @media (max-width: 600px) {
+          .sidenav-trigger,
+          .go-back, {
+            width: 20%;
+          }
+        }
       }
       @media (max-width: 600px) {
         .nav-wrapper {
@@ -137,17 +167,20 @@
     }
   }
   // Sidenav Mobile
-  .hamburger {
-    height: 100%;
-  }
   .sidenav {
     width: 20rem !important;
     li {
       width: 100%;
       a {
+        height: 64px;
         .flex();
         .flex-align-items(center);
         .flex-justify(center);
+      }
+      @media (max-width: 600px) {
+        a {
+          height: 56px;
+        }
       }
     }
     .subpage-link {
