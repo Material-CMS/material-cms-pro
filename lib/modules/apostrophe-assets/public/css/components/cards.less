@@ -2,6 +2,58 @@
 .card {
   background-color: inherit;
   margin: 0;
+  .lightbox {
+    height: 100%;
+    .card-image {
+      cursor: zoom-in;
+    }
+    .lightbox-image {
+      position: absolute;
+      display: block;
+      opacity: 0;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      transform: translate(-50%, -50%);
+      transform-origin: center;
+      z-index: 8;
+      cursor: zoom-in;
+      .transition(all, .4s, ease);
+      img {
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        margin-bottom: -3px;
+        width: 100%;
+        height: auto !important;
+        .transition(border-radius, .4s, ease);
+      }
+    }
+    .lightbox-image.active {
+      position: fixed;
+      width: 98%;
+      cursor: zoom-out;
+    }
+    .lightbox-overlay {
+      position: fixed;
+      display: none;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgb(121, 125, 127);
+      z-index: 4;
+      cursor: pointer;
+      .transition(opacity, .4s, ease);
+    }
+    .lightbox-overlay.active {
+      display: block;
+    }
+  }
 	.gradient-overlay {
 		position: relative;
 		cursor: pointer;
@@ -92,7 +144,6 @@
               .images-container {
                 padding: 0;
                 .radius {
-
                   margin: 0;
                 }
               }
@@ -103,7 +154,7 @@
     }
   }
   .card-action {
-		background-color: transparent;
+		background-color: inherit;
     margin: 0;
     .row.widget {
       margin: 2rem 0;
@@ -133,7 +184,6 @@
 .col.anime {
   position: relative;
   .anime-image {
-    // margin-bottom: 10rem;
     cursor: pointer;
     position: relative;
     transform-origin: 0 100%;
@@ -149,7 +199,7 @@
     right: 0;
     bottom: 0;
     opacity: 0;
-    background-color: rgba(0,0,0,0.5);
+    background-color:  #797d7f;
     z-index: 4;
     cursor: pointer;
     .go-back {
@@ -168,6 +218,7 @@
     position: absolute;
     z-index: 5;
     top: 0;
+    width: 100%;
     height: initial !important;
     transform: scale(0);
     opacity: 0;
@@ -175,13 +226,37 @@
     .row.widget {
       margin-bottom: 0;
       .radius {
-        max-height: 60vh;
+        // max-height: 60vh;
+        .card-image {
+          display: none;
+        }
         .card-content {
-          .transition(padding, .5s, ease);
+          .transition(all, .5s, ease);
           height: 100%;
+          max-height: 800px;
           .apos-area {
             max-height: 45vh;
             overflow-y: scroll;
+          }
+        }
+        .card-content.collapsed {
+          max-height: 0;
+          padding: 0 24px;
+        }
+        .card-action {
+          min-height: 75.2px;
+          max-height: 40vh;
+          .collapsible-header {
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+            z-index: 1;
+          }
+          .collapsible-body {
+            .apos-area {
+              max-height: 40vh;
+              overflow-y: scroll;
+            }
           }
         }
       }
@@ -192,7 +267,7 @@
   .anime-overlay {
     display: block;
   }
-  .anime-image {
+  .anime-image.radius {
     height: 80% !important;
     z-index: 6;
   }
@@ -200,3 +275,14 @@
     height: 40% !important;
   }
 }
+// // Double & triple widgets radius override
+// .radius.animate {
+//   .anime-image.radius {
+//     .border-radius(inherit) !important;
+//     .transition(border-radius, .4s, ease);
+//   }
+//   .anime-container.radius {
+//     .border-radius(inherit) !important;
+//     .transition(border-radius, .4s, ease);
+//   }
+// }
