@@ -10,21 +10,17 @@ var apos = require('apostrophe')({
     // Ordering Module for Pieces
     'apostrophe-pieces-orderings-bundle': {},
     // Custom Modules
-    'card-widgets': {
-      player: true
-    },
-    'button-widgets':{
-      player: true
-    },
+    'card-widgets': {},
+    'card-anime-widgets': {},
+    'card-link-widgets': {},
+    'button-widgets':{},
     'call-to-action-widgets': {},
     'double-widgets': {},
     'events': {},
     'events-widgets': {
       player: true
     },
-    'footer-widgets':{
-      player : true
-    },
+    'footer-widgets':{},
     'galleries':{
       orderings: true
     },
@@ -36,13 +32,12 @@ var apos = require('apostrophe')({
     },
     'galleries-widgets': {},
     'grid-widgets': {},
-    'navigations':{},
-    'navigations-widgets': {
-      player: true
-    },
+    'iframe-widgets': {},
     'link-widgets': {},
     'link-page-widgets': {},
     'link-subpages-widgets': {},
+    'navigations':{},
+    'navigations-widgets': {},
     'people': {
       ordering: true
     },
@@ -59,9 +54,7 @@ var apos = require('apostrophe')({
     'sections-orderings': {
       extend: 'apostrophe-pieces-orderings'
     },
-    'sections-widgets': {
-      player: true
-    },
+    'sections-widgets': {},
     'shape-divider-path-widgets': {},
     'shape-divider-file-widgets': {
       player: true
@@ -94,7 +87,6 @@ var apos = require('apostrophe')({
     'texts-widgets': {
       player: true
     },
-    'texts-card-widgets': {},
     'triple-widgets': {},
     'video-widgets': {},
     // CKEditor addons

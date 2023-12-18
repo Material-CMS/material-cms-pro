@@ -1,7 +1,10 @@
 {# choose either pieces of templates of piece pages #}
 {% set pieces = data.widget._pieces or data.pieces %}
+
 {# set additional font from global #}
-{% set additionalFont = data.global.additionalFonts | replace("+"," ") or null %}
+{% if data.global.additionalFonts %}
+  {% set additionalFont = data.global.additionalFonts | replace("+"," ") | replace( r/:.*$/,"") %}
+{% endif %}
 
 {% for piece in pieces %}
 
@@ -15,9 +18,9 @@
       {# Parallax Image #}
       <div class="parallax">
         <img
-          src="{{ apos.attachments.url(piece._backgroundImage.attachment, { size: data.options.size or 'one-third' }) }}"
+          src="{{ apos.attachments.url(piece._backgroundImage.attachment, { size: data.options.size or 'full' }) }}"
           srcset="{{ apos.images.srcset(piece._backgroundImage.attachment) }}"
-          sizes="(max-width:600px) 50vw, 60vw"
+          sizes="(max-width:600px) 80vw, 100vw"
           alt="{{ piece._backgroundImage.description or piece._backgroundImage.title }}"
         >
       </div>
@@ -63,48 +66,9 @@
   {# Section #}
   <div id="{{ piece.slug }}" class="section bg-color"
     {% if backgroundColor %}
-      style="
-        {% if backgroundColor %}
-          background-color:{{ backgroundColor }};
-        {% endif %}
-        "
+      style="background-color:{{ backgroundColor }}"
     {% endif %}
   >
-
-    {# Top Shape Divider #}
-    {% if piece.shapeDividerTop.items[0] and not (piece._backgroundImage and piece.backgroundImageParallax) %}
-      <div class="shape-divider-top"
-        {% if backgroundColor %}
-          style="fill: {{ backgroundColor }}"
-        {% endif %}
-      >
-        {{ apos.area(piece, 'shapeDividerTop', {
-          limit: 1,
-          widgets: {
-            'shape-divider-path': {
-              addLabel: 'Add Top Shape Divider',
-              editLabel: 'Change Top Shape Divider',
-              controls: {
-                cloneable: false,
-                removable: true,
-                movable: false,
-                position: 'top-left'
-              }
-            },
-            'shape-divider-file': {
-              addLabel: 'Add Top Shape Divider',
-              editLabel: 'Change Top Shape Divider',
-              controls: {
-                cloneable: false,
-                removable: true,
-                movable: false,
-                position: 'top-left'
-              }
-            }
-          }
-        }) }}
-      </div>
-    {% endif %}
 
     {# Background Image #}
     {% if piece._backgroundImage and not piece.backgroundImageParallax %}
@@ -136,6 +100,7 @@
 
     {# Slide #}
     {% if piece.sectionStyle == 'slide' %}
+
       <div class="slide-content">
 
         {{ apos.singleton(piece, 'sliderContent', 'slider', {
@@ -151,7 +116,43 @@
           }
         }) }}
 
+        {# Top Shape Divider #}
+        {% if piece.shapeDividerTop.items[0] and not (piece._backgroundImage and piece.backgroundImageParallax) %}
+          <div class="shape-divider-top divider-slide"
+            {% if backgroundColor %}
+              style="fill: {{ backgroundColor }}"
+            {% endif %}
+          >
+            {{ apos.area(piece, 'shapeDividerTop', {
+              limit: 1,
+              widgets: {
+                'shape-divider-path': {
+                  addLabel: 'Add Top Shape Divider',
+                  editLabel: 'Change Top Shape Divider',
+                  controls: {
+                    cloneable: false,
+                    removable: true,
+                    movable: false,
+                    position: 'top-left'
+                  }
+                },
+                'shape-divider-file': {
+                  addLabel: 'Add Top Shape Divider',
+                  editLabel: 'Change Top Shape Divider',
+                  controls: {
+                    cloneable: false,
+                    removable: true,
+                    movable: false,
+                    position: 'top-left'
+                  }
+                }
+              }
+            }) }}
+          </div>
+        {% endif %}
+
       </div>
+
     {% endif %}
 
     {# Main Content#}
@@ -167,20 +168,20 @@
       {% endif %}
     >
 
-    {# Container #}
-    {% if piece.container %}
-      <div class="container">
-    {% endif %}
+      {# Widgets Container #}
+      <div class="widgets-container
+        {% if piece.content.items.length > 1 and piece.glueWidgets == true %}
+          glue-container
+        {% endif %}
+        {% if (piece.content.items[0].type == 'double' or piece.content.items[0].type == 'triple') and piece.glueWidgets == true %}
+          glue-container-columns-single
+        {% endif %}
+      ">
 
-        {# Widgets Container #}
-        <div class="widgets-container
-          {% if piece.content.items.length > 1 and piece.glueWidgets == true %}
-            glue-container
-          {% endif %}
-          {% if (piece.content.items[0].type == 'double' or piece.content.items[0].type == 'triple') and piece.glueWidgets == true %}
-            glue-container-columns-single
-          {% endif %}
-        ">
+        {# Container #}
+        {% if piece.container %}
+          <div class="container">
+        {% endif %}
 
           {# Header #}
           {% if piece.header %}
@@ -192,10 +193,10 @@
               {% elif piece.headerAlign == 'right' %}
                 right-align
               {% endif %}"
-              {% if piece.headerColor or data.global.additionalFonts %}
+              {% if piece.headerColor or piece.headerAdditionalFont %}
                 style="
                   {% if piece.headerColor %}
-                    color: {{ piece.headerColor }}
+                    color: {{ piece.headerColor }};
                   {% endif %}
                   {% if piece.headerAdditionalFont %}
                     font-family: {{ additionalFont }}, sans-serif;
@@ -223,6 +224,32 @@
                   position: 'top-right'
                 }
               },
+              'card-anime': {
+                addLabel: 'Image Animated',
+                editLabel: 'Cange Anime Image',
+                size: 'one-half',
+                limit: 1,
+                noHeight: true,
+                sizesAttr: '(max-width:600px) 50vw, 40vw',
+                controls: {
+                  cloneable: false,
+                  removable: true,
+                  position: 'top-right'
+                }
+              },
+              'card-link': {
+                addLabel: 'Image Link',
+                editLabel: 'Cange Link Image',
+                size: 'one-half',
+                limit: 1,
+                noHeight: true,
+                sizesAttr: '(max-width:600px) 50vw, 40vw',
+                controls: {
+                  cloneable: false,
+                  removable: true,
+                  position: 'top-right'
+                }
+              },
               'double': {
                 addLabel: 'Double Elements',
                 editLabel: 'Cange Elements',
@@ -235,6 +262,15 @@
               'events': {
                 addLabel: 'Events',
                 editLabel: 'Cange Events',
+                controls: {
+                  cloneable: false,
+                  removable: true,
+                  position: 'top-right'
+                }
+              },
+              'iframe': {
+                addLabel: 'Iframe',
+                editLabel: 'Cange Iframe',
                 controls: {
                   cloneable: false,
                   removable: true,
@@ -352,12 +388,12 @@
             }
           }) }}
 
-        </div>
+        {# Container End #}
+        {% if piece.container %}
+          </div>
+        {% endif %}
 
-    {# Container End #}
-    {% if piece.container %}
       </div>
-    {% endif %}
 
     </div>
 

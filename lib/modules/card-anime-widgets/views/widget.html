@@ -1,0 +1,163 @@
+{% if data.widget._pieces.length %}
+
+  <div class="row widget">
+    <div class="col s12 anime">
+      <div class="anime-image radius{% if data.widget.shadow %} z-depth-1{% endif %}">
+        <div class="card z-depth-0">
+
+          {% for entry in data.widget._pieces %}
+            {% set image = entry.item or entry %}
+            {% set relationship = entry.relationship %}
+
+            <div class="card-image image-radius">
+
+              <img
+                src="{{ apos.attachments.url(image.attachment, { size: data.options.size, crop: relationship }) }}"
+                srcset="{{ apos.images.srcset(image.attachment, relationship ) }}"
+                sizes="{{ data.options.sizesAttr or '100vw' }}"
+                alt="{{ image.title }}"
+                {%- if apos.attachments.hasFocalPoint(relationship) -%}
+                  style="object-position: {{ apos.attachments.focalPointToBackgroundPosition(relationship) }}"
+                {%- endif -%}
+              >
+
+              {% if data.widget.titleDisplay %}
+                <span
+                  class="card-title {{ data.widget.titleAlign }}"
+                  {%- if data.widget.titleBackgroundColor -%}
+                    style="background-color: {{ data.widget.titleBackgroundColor }}"
+                  {%- endif -%}
+                >
+                  <h4 class="accent-color truncate"
+                    {%- if data.widget.titleColor -%}
+                      style="color:{{ data.widget.titleColor }}"
+                    {%- endif -%}
+                  >
+                    {{ image.title }}
+                  </h4>
+                </span>
+              {% endif %}
+
+            </div>
+
+            {% if image.description %}
+
+              <div class="card-content">
+                <p class="flow-text">
+
+                  {{ image.description | nlbr }}
+
+                </p>
+              </div>
+
+            {% endif %}
+
+            {% if image.credit %}
+              <div class="credit">
+                {% if image.creditUrl %}
+                    <a href="{{ image.creditUrl }}" target="_blank">
+                {% endif %}
+                      <span>{{ image.credit }}</span>
+                {% if image.creditUrl %}
+                    </a>
+                {% endif %}
+              </div>
+            {% endif %}
+
+          {% endfor %}
+
+        </div>
+      </div>
+
+      <div class="anime-overlay"
+        {% if data.widget.overlayColor %}
+          style="background-color: {{ data.widget.overlayColor }}"
+        {% endif %}
+      >
+
+      </div>
+
+      <div class="anime-container radius">
+        <div class="row widget">
+          <div class="col s12">
+
+            {% if data.widget.doubleColumns %}
+              <div class="row columns double">
+                <div class="columns-container left">
+            {% endif %}
+
+                {{ apos.area(data.widget, 'animeWidgets', {
+                  limit: 1,
+                  widgets: {
+                    'texts': {
+                      animeContext: true,
+                      controls: {
+                        cloneable: false,
+                        removable: true,
+                        movable: false,
+                        position: 'bottom-left'
+                      }
+                    },
+                    'card': {
+                      size: 'one-half',
+                      sizesAttr: '(max-width:600px) 50vw, 25vw',
+                      focalPoint: true,
+                      noHeight: true,
+                      controls: {
+                        cloneable: false,
+                        removable: true,
+                        movable: false,
+                        position: 'top-right'
+                      }
+                    }
+                  }
+                }) }}
+
+            {% if data.widget.doubleColumns %}
+              </div>
+                <div class="columns-container right">
+
+                  {{ apos.area(data.widget, 'animeWidgetsDoubleColumns', {
+                    limit: 1,
+                    widgets: {
+                      'texts': {
+                        animeContext: true,
+                        controls: {
+                          cloneable: false,
+                          removable: true,
+                          movable: false,
+                          position: 'bottom-left'
+                        }
+                      },
+                      'card': {
+                        size: 'one-half',
+                        sizesAttr: '(max-width:600px) 50vw, 25vw',
+                        focalPoint: true,
+                        noHeight: true,
+                        controls: {
+                          cloneable: false,
+                          removable: true,
+                          movable: false,
+                          position: 'top-right'
+                        }
+                      }
+                    }
+                  }) }}
+
+                </div>
+              </div>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+{% else %}
+  <div class="apos-area apos-empty">
+    <i class="material-icons">clear</i>
+    <p class="flow-text">NO IMAGE<p>
+  </div>
+{% endif %}

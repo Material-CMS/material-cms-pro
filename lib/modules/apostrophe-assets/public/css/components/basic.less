@@ -22,6 +22,7 @@
 
 // Basics
 html {
+  overflow-x: hidden;
   scroll-behavior: smooth;
 }
 body {
@@ -40,10 +41,10 @@ iframe {
 }
 // Typo
 h3 {
-  font-size: 1.64rem !important;
+  font-size: 1.64rem;
 }
 h4 {
-  font-size: 1.64rem !important;
+  font-size: 1.64rem;
 }
 strong {
   font-weight: bolder !important;
@@ -158,6 +159,9 @@ strong {
 .margin-top {
   margin-top: 1rem;
 }
+.height-100 {
+  height: 100% !important;
+}
 // Ajax append styles
 .ajax-append {
   .pagination-wrapper {
@@ -170,7 +174,21 @@ strong {
     }
   }
 }
-
+// Background Images
+.background-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.background-image img {
+  .object-fit(cover);
+  width: 100%;
+  height: 100%;
+}
+// Various Placeholders
+.margin-placeholder {
+  margin-top: 67px;
+}
 // Admin UI Overrides
 .apos-ui {
   .apos-dropdown.apos-dropdown--area-controls {

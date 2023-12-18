@@ -4,9 +4,9 @@
     margin: 0 !important;
     .col {
       padding: 0;
-      .radius {
-        .border-radius(0) !important;
-      }
+    }
+    .col > .radius {
+      .border-radius(0) !important;
     }
   }
 }
@@ -15,27 +15,8 @@
   .row {
     width: 100%;
   }
-  .card-action {
-    a {
-      margin-right: 0 !important;
-    }
-    li {
-      .less {
-        display: none;
-      }
-    }
-    li.active {
-      .more {
-        display: none;
-      }
-      .less {
-        display: block;
-      }
-    }
-  }
   .height-100 {
     padding: 0;
-    height: 100% !important;
   }
   .card-image {
     max-width: 100%;
@@ -71,11 +52,6 @@
   }
   .card-stacked {
     height: 100% !important;
-    .card-content {
-      .margin-placeholder {
-        margin-top: 67px;
-      }
-    }
   }
   @media (max-width: 600px) {
     .height-100 {
@@ -97,16 +73,37 @@
     }
   }
 }
+// Card action buttons
+.card-action {
+  a {
+    margin-right: 0 !important;
+  }
+  li {
+    .collapsible-header {
+      span.hover-background.less {
+        display: none;
+      }
+    }
+  }
+  li.active {
+    .collapsible-header {
+      span.hover-background.more {
+        display: none;
+      }
+      span.hover-background.less {
+        display: block;
+      }
+    }
+  }
+}
 // Auto color changes
 .card-stacked {
   background-color: @white;
+  color: @dark;
 }
 // Auto color changes
 .card-stacked.dark-background {
   color: @light;
-}
-.card-stacked.light-background {
-  color: @dark;
 }
 // Pages styles
 .pages-container {

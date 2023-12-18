@@ -2,116 +2,21 @@
 .card {
   background-color: inherit;
   margin: 0;
-  .lightbox {
-    height: 100%;
-    .card-image {
-      cursor: zoom-in;
-    }
-    .lightbox-image {
+  .card-image {
+    .credit {
       position: absolute;
-      display: block;
-      opacity: 0;
-      top: 50%;
-      left: 50%;
-      width: 100%;
-      height: 100%;
-      transform: translate(-50%, -50%);
-      transform-origin: center;
+      left: 0;
+      bottom: 0;
+      padding: 24px;
       z-index: 8;
-      cursor: zoom-in;
-      .transition(all, .4s, ease);
-      img {
-        position: absolute;
-        top: 50%;
-        transform: translate(0, -50%);
-        margin-bottom: -3px;
-        width: 100%;
-        height: auto !important;
-        .transition(border-radius, .4s, ease);
+      span {
+        color: #ffab40;
+        margin-right: 24px;
+        .transition(color, 0.3s, ease);
+        text-transform: uppercase;
       }
     }
-    .lightbox-image.active {
-      position: fixed;
-      width: 98%;
-      cursor: zoom-out;
-    }
-    .lightbox-overlay {
-      position: fixed;
-      display: none;
-      opacity: 0;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgb(121, 125, 127);
-      z-index: 4;
-      cursor: pointer;
-      .transition(opacity, .4s, ease);
-    }
-    .lightbox-overlay.active {
-      display: block;
-    }
   }
-	.gradient-overlay {
-		position: relative;
-		cursor: pointer;
-		width: 100%;
-		height: 100%;
-	  .card-image {
-	    max-height: 100vh;
-	    cursor: pointer;
-	    img {
-	      width: 100%;
-	      height: 100%;
-	      .object-fit(cover);
-	      visibility: visible;
-	    }
-	  }
-	  .card-title {
-			opacity: 1;
-			.transition(opacity, .5s, ease);
-	    width: 100%;
-	    h4 {
-        margin: 0;
-	      line-height: 2rem;
-	    }
-	  }
-		.click-action-link {
-			pointer-events: none;
-			touch-action: none;
-			position: absolute;
-			bottom: 50%;
-      width: 100%;
-			transform: translate(0, -50%);
-			z-index: 4;
-			opacity: 0;
-      padding: 24px;
-			.transition(opacity, 1s, ease);
-		}
-    .click-action-link.bottom {
-      bottom: 0;
-      transform: translate(0);
-    }
-	}
-	.gradient-overlay:after {
-		content:'';
-		z-index: 3;
-		position:absolute;
-		left:0; top:0;
-		width:100%; height:100%;
-		display: none;
-		opacity: 0;
-		.transition(opacity, .5s, ease);
-	}
-	.gradient-overlay:hover:after,
-	.gradient-overlay:hover span {
-		opacity: 1;
-	}
-	.gradient-overlay:hover .card-title {
-		opacity: 0;
-	}
   .card-content {
     p {
       pointer-events: none;
@@ -126,6 +31,20 @@
     }
     .apos-area-widget-wrapper:first-child {
       margin: 0;
+    }
+  }
+  .card-title {
+    width: 100%;
+    h4 {
+      margin: 0;
+    }
+  }
+  @media (max-width: 600px) {
+    .card-title {
+      padding: 12px 24px !important;
+      h4 {
+        font-size: 4vw;
+      }
     }
   }
 	// no active element for that in DOM really needed ?
@@ -180,109 +99,80 @@
   .btn-floating.halfway-fab {
     right: 50px;
   }
-}
-.col.anime {
-  position: relative;
-  .anime-image {
-    cursor: pointer;
-    position: relative;
-    transform-origin: 0 100%;
-    .transition(height, .3s, ease);
-  }
-  .anime-overlay {
-    position: fixed;
-    display: none;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    opacity: 0;
-    background-color:  #797d7f;
-    z-index: 4;
-    cursor: pointer;
-    .go-back {
-      color: @white;
+  .lightbox {
+    .lightbox-image {
+      cursor: pointer;
+      position: absolute;
       display: block;
-      height: 64px;
-      .flex();
-      .flex-align-items(center);
-      i {
-        margin: 0 5px;
+      opacity: 0;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      transform: translate(-50%, -50%);
+      transform-origin: center;
+      .transition(all, .4s, ease);
+      img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin-bottom: -3px;
+        width: 100%;
+        height: auto !important;
+        .border-radius(inherit);
+        .transition(all, .5s, ease);
       }
     }
-  }
-  .anime-container {
-    .transition(height, .3s, ease);
-    position: absolute;
-    z-index: 5;
-    top: 0;
-    width: 100%;
-    height: initial !important;
-    transform: scale(0);
-    opacity: 0;
-    padding-top: 0;
-    .row.widget {
-      margin-bottom: 0;
-      .radius {
-        // max-height: 60vh;
-        .card-image {
-          display: none;
-        }
-        .card-content {
-          .transition(all, .5s, ease);
-          height: 100%;
-          max-height: 800px;
-          .apos-area {
-            max-height: 45vh;
-            overflow-y: scroll;
-          }
-        }
-        .card-content.collapsed {
-          max-height: 0;
-          padding: 0 24px;
-        }
-        .card-action {
-          min-height: 75.2px;
-          max-height: 40vh;
-          .collapsible-header {
-            position: absolute;
-            width: 100%;
-            bottom: 0;
-            z-index: 1;
-          }
-          .collapsible-body {
-            .apos-area {
-              max-height: 40vh;
-              overflow-y: scroll;
-            }
-          }
+    .lightbox-image.active {
+      position: fixed;
+      cursor: zoom-out !important;
+      z-index: 10;
+      padding: 0 2vw;
+      img {
+        max-height: 95vh;
+        object-fit: cover;
+        width: 95vw;
+      }
+      // .card-content {
+      //   bottom: 24px;
+      //   border-radius: inherit;
+      //   position: absolute;
+      //   width: 95vw;
+      // }
+    }
+    .lightbox-image.portrait.active {
+      img {
+        height: 95vh !important;
+        width: auto;
+        max-width: 95vw;
+      }
+    }
+    @media (max-width: 600px) {
+      .lightbox-image.portrait.active {
+        img {
+          max-height: 75vh;
+          width: 95vw;
         }
       }
     }
+    .lightbox-overlay {
+      position: fixed;
+      display: none;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgb(121, 125, 127);
+      z-index: 9;
+      cursor: pointer;
+      .transition(opacity, .4s, ease);
+    }
+    .lightbox-overlay.active {
+      display: block;
+    }
   }
 }
-.col.anime.active {
-  .anime-overlay {
-    display: block;
-  }
-  .anime-image.radius {
-    height: 80% !important;
-    z-index: 6;
-  }
-  .anime-image.portrait {
-    height: 40% !important;
-  }
-}
-// // Double & triple widgets radius override
-// .radius.animate {
-//   .anime-image.radius {
-//     .border-radius(inherit) !important;
-//     .transition(border-radius, .4s, ease);
-//   }
-//   .anime-container.radius {
-//     .border-radius(inherit) !important;
-//     .transition(border-radius, .4s, ease);
-//   }
-// }

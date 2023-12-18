@@ -79,7 +79,7 @@
 }
 // Glue widgets override
 .widgets-container.glue-container {
-  .row.columns.triple:not(.radius.animate) {
+  .row.columns.triple {
     .columns-container.left {
       padding: 0 !important;
       .apos-area-widget-wrapper,
@@ -150,7 +150,7 @@
   }
 }
 .widgets-container.glue-container-columns-single {
-  .row.columns.triple:not(.radius.animate)  {
+  .row.columns.triple {
     .columns-container.left {
       padding: 0 !important;
       .apos-area-widget-wrapper,
@@ -227,14 +227,14 @@
     .columns-container {
       width: 100%;
       padding: 0 !important;
-      .apos-area-widget-wrapper{
-        margin-bottom: 1.8rem;
-      }
+    }
+    .columns-container > .apos-area > .apos-area-widget-wrapper {
+      margin-bottom: 1.8rem;
     }
   }
   // Glue widgets override
   .widgets-container.glue-container {
-    .row.columns.triple:not(.radius.animate) {
+    .row.columns.triple {
       .columns-container.left {
         padding: 0 !important;
         .apos-area-widget-wrapper {
@@ -288,7 +288,7 @@
     }
   }
   .widgets-container.glue-container-columns-single {
-    .row.columns.triple:not(.radius.animate) {
+    .row.columns.triple {
       .columns-container.left {
         padding: 0 !important;
         .apos-area-widget-wrapper {
