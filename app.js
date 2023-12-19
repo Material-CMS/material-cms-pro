@@ -199,25 +199,26 @@ var apos = require('apostrophe')({
       locales: [
         {
           name: 'default',
-          label: 'Deutsch',
+          label: 'Default',
+          private: true,
           children: [
             {
-              name: 'en-gb',
-              label: 'England'
+              name: 'en-us',
+              label: 'English'
             },
             {
-              name: 'fr',
-              label: 'Frankreich'
+              name: 'de-de',
+              label: 'German'
             },
             {
               name: 'sp',
-              label: 'Spanien'
+              label: 'Spanish'
             },
           ]
         },
       ],
       exportAfterCommit: false,
-      defaultLocale: 'de-de',
+      defaultLocale: 'en-us',
       alias: 'workflow',
       replicateAcrossLocales: false
     },

@@ -32,6 +32,35 @@ module.exports = {
         }
       }
     },
+    // Change Apostrophe Workflow settings here
+    // https://github.com/apostrophecms/apostrophe-workflow
+    'apostrophe-workflow': {
+      locales: [
+        {
+          name: 'default',
+          label: 'Default',
+          private: true,
+          children: [
+            {
+              name: 'en-us',
+              label: 'English'
+            },
+            {
+              name: 'de-de',
+              label: 'German'
+            },
+            {
+              name: 'sp',
+              label: 'Spanish'
+            }
+          ]
+        },
+      ],
+      exportAfterCommit: false,
+      defaultLocale: 'en-us',
+      alias: 'workflow',
+      replicateAcrossLocales: false
+    },
     // Apostrophe has full-text search capabilities built set searched pages here
     // https://docs.apostrophecms.org/core-concepts/apostrophe-search/search.html
     'apostrophe-search': {
