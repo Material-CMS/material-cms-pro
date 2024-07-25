@@ -52,6 +52,16 @@
   }
   .card-stacked {
     height: 100% !important;
+    .card-content {
+      opacity: 1;
+      .transition(all, .5s, ease);
+    }
+    .card-content.collapsed {
+      padding-top: 0;
+      padding-bottom: 0;
+      max-height: 0;
+      opacity: 0;
+    }
   }
   @media (max-width: 600px) {
     .height-100 {
@@ -80,6 +90,7 @@
   }
   li {
     .collapsible-header {
+      background-color: inherit;
       span.hover-background.less {
         display: none;
       }
@@ -98,7 +109,7 @@
 }
 // Auto color changes
 .card-stacked {
-  background-color: @white;
+  background-color: inherit;
   color: @dark;
 }
 // Auto color changes
