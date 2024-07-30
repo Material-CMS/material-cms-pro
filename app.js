@@ -179,31 +179,7 @@ var apos = require('apostrophe')({
     'apostrophe-templates': { viewsFolderFallback: path.join(__dirname, 'views') },
     // Apostrophe Workflow module
     'apostrophe-workflow': {
-      locales: [
-        {
-          name: 'default',
-          label: 'Default',
-          private: true,
-          children: [
-            {
-              name: 'en-us',
-              label: 'English'
-            },
-            {
-              name: 'de-de',
-              label: 'German'
-            },
-            {
-              name: 'sp',
-              label: 'Spanish'
-            },
-          ]
-        },
-      ],
-      exportAfterCommit: false,
-      defaultLocale: 'en-us',
       alias: 'workflow',
-      replicateAcrossLocales: false
     },
     'apostrophe-workflow-modified-documents': {}
   // << End of Modules
