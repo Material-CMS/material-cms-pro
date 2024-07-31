@@ -35,31 +35,30 @@ module.exports = {
     // Change Apostrophe Workflow settings here
     // https://github.com/apostrophecms/apostrophe-workflow
     'apostrophe-workflow': {
+      prefixes: {
+        'de-de': '/de',
+        'es-es': '/es',
+      },
       locales: [
         {
-          name: 'default',
-          label: 'Default',
-          private: true,
+          name: 'en-us',
+          label: 'EN',
+          private: false,
           children: [
             {
-              name: 'en-us',
-              label: 'English'
-            },
-            {
               name: 'de-de',
-              label: 'German'
+              label: 'DE'
             },
             {
-              name: 'sp',
-              label: 'Spanish'
+              name: 'es-es',
+              label: 'ES'
             }
           ]
         },
       ],
-      exportAfterCommit: false,
       defaultLocale: 'en-us',
-      alias: 'workflow',
-      replicateAcrossLocales: false
+      replicateAcrossLocales: false,
+      exportAfterCommit: false
     },
     // Apostrophe has full-text search capabilities built set searched pages here
     // https://docs.apostrophecms.org/core-concepts/apostrophe-search/search.html
