@@ -1,59 +1,59 @@
 footer.page-footer {
   background-color: @light;
-	h4 {
-		font-size: 1.1rem !important;
-		margin: 0;
-	}
-	.container {
-		margin-bottom: 1.3rem;
-		.row {
-			.flex();
-			width: 100%;
-			.col {
-				ul {
-					display: table;
-				}
-				h3 {
+  h4 {
+    font-size: 1.1rem !important;
+    margin: 0;
+  }
+  .container {
+    margin-bottom: 1.3rem;
+    .row {
+      .flex();
+      width: 100%;
+      .col {
+        ul {
+          display: table;
+        }
+        h3 {
           .transition(color, 0.2s, ease-in);
-					padding: 0 16px;
-				}
-				.btn-flat {
-					.flex();
-					.flex-align-items(center);
+          padding: 0 16px;
+        }
+        .btn-flat {
+          .flex();
+          .flex-align-items(center);
           color: inherit;
-					.material-icons {
-						line-height: 100%;
-						font-size: 1.4rem !important;
-					}
-					h4 {
+          .material-icons {
+            line-height: 100%;
+            font-size: 1.4rem !important;
+          }
+          h4 {
             .transition(color, 0.2s, ease-in);
-						white-space: nowrap;
-						float: left;
-						line-height: 130%;
-						margin: 0;
-						text-transform: none;
-					}
-				}
+            white-space: nowrap;
+            float: left;
+            line-height: 130%;
+            margin: 0;
+            text-transform: none;
+          }
+        }
         .btn-flat {
           text-transform: none;
         }
-				.btn-flat.address {
+        .btn-flat.address {
           white-space: nowrap;
-					height: 6rem;
-				}
-				.container {
-					.flex();
-	        .flex-align-items(center);
-	        .flex-justify(space-between);
-					width: 100%;
-					height: 100%;
+          height: 6rem;
+        }
+        .container {
+          .flex();
+          .flex-align-items(center);
+          .flex-justify(space-between);
+          width: 100%;
+          height: 100%;
           li {
             display: inline-block;
           }
-				}
-			}
-		}
-	}
+        }
+      }
+    }
+  }
   // copyright
   .footer-copyright {
     color: inherit;
@@ -71,7 +71,7 @@ footer.page-footer {
       .row {
         .col {
           padding: 0;
-          margin-bottom: .3rem;
+          margin-bottom: 0.3rem;
         }
         .center {
           .flex();
@@ -94,52 +94,75 @@ footer.page-footer {
         }
       }
     }
+    .footer-container.locale {
+      ul.col {
+        padding: 0 0.75rem;
+        li {
+          float: right;
+          a {
+            padding: 0 10px;
+          }
+          p {
+            float: right;
+            margin: 0;
+          }
+        }
+      }
+      .center {
+        .flex-justify(flex-end);
+      }
+      @media (max-width: 600px) {
+        .center {
+          .flex-justify(center);
+        }
+      }
+    }
   }
   // mobile overrides
-	@media (max-width: 600px) {
-		.container {
-			margin-bottom: 0;
-			.row {
-				display: block;
-				.col {
-					margin: 1.3rem 0;
-					h3 {
-						text-align: center;
-					}
-					ul {
-						width: 100%;
-						li {
-							width: 100%;
-							a {
-								position: relative;
-								width: 100%;
-								h4 {
-									position: absolute;
-									left: 50%;
-									margin: 0 -50% 0 0;
-									transform: translate(-50%, 0);
-								}
-							}
-						}
-					}
-					.btn-flat {
+  @media (max-width: 600px) {
+    .container {
+      margin-bottom: 0;
+      .row {
+        display: block;
+        .col {
+          margin: 1.3rem 0;
+          h3 {
+            text-align: center;
+          }
+          ul {
+            width: 100%;
+            li {
+              width: 100%;
+              a {
+                position: relative;
+                width: 100%;
+                h4 {
+                  position: absolute;
+                  left: 50%;
+                  margin: 0 -50% 0 0;
+                  transform: translate(-50%, 0);
+                }
+              }
+            }
+          }
+          .btn-flat {
             .flex-justify(center);
-						width: 70%;
-						margin-left: auto;
-						margin-right: auto;
-					}
-					.container {
+            width: 70%;
+            margin-left: auto;
+            margin-right: auto;
+          }
+          .container {
             width: 90%;
-						.row {
-							.col {
-								padding: 0 .75rem;
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+            .row {
+              .col {
+                padding: 0 0.75rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 footer.page-footer {
   color: @dark;
@@ -155,11 +178,11 @@ footer.page-footer.dark-background {
 }
 // override accent and text color if footerTextColor
 footer.page-footer.footer-text-color {
+  .footer-copyright,
   a,
-  i,
   h3,
   h4,
-  .footer-copyright {
+  i {
     color: inherit !important;
   }
   .btn.btn-color.dark-background {
