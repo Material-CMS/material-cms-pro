@@ -223,6 +223,24 @@
     </div>
   {% endif %}
 
+
+  {%- if apos.workflow.localizations().length > 1 -%}
+    <div class="footer-copyright">
+      <div class="footer-container locale">
+        <div class="row">
+            <ul class='col s12 center'>
+              {% for localization in apos.workflow.localizations() %}
+                <li>
+                  <a href="{{ localization._url | build({ workflowLocale: localization.workflowLocale }) }}">{{ localization.label }}</a>
+                  {% if not loop.last %}<p>|</p>{% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
   <div class="footer-copyright">
     <div class="footer-container">
       <div class="row">
@@ -276,4 +294,5 @@
       </div>
     </div>
   </div>
+
 </footer>
