@@ -69,6 +69,9 @@
       {% endif %}
     </a>
 
+    {# Locale Switcher #}
+    {% include "components/locale-switcher.html" %}
+
       {# Sidenav Trigger #}
       {% if data.page.orphan or data.piece %}
         <a href="#" class="flow-text waves-effect hide-on-large-only go-back">
@@ -103,9 +106,6 @@
       {% endif %}
 
       <ul class="nav-activator right hide-on-med-and-down">
-
-        {# Extra Links #}
-        {% include "components/extra-links.html" %}
 
         {# Include Nav #}
         {% if data.page.orphan or data.piece %}
@@ -159,9 +159,6 @@
       "
     {% endif %}
   >
-
-    {# Extra Links #}
-    {% include "components/extra-links.html" %}
 
     {# Include Nav #}
       {% if data.widget.nav == 'default' %}
