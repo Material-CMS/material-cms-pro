@@ -119,7 +119,7 @@
           ul.col {
             margin-left: 50%;
             transform: translate(-50%, 0);
-            max-width: 136px;
+            width: initial;
             padding: 0 0.75rem;
             li {
               float: right;
@@ -140,6 +140,17 @@
           @media (max-width: 600px) {
             .center {
               .flex-justify(center);
+            }
+          }
+        }
+        @media (max-width: 992px) {
+          .nav-locale {
+            margin-right: 0;
+            width: 140px;
+            ul.col {
+            margin-left: 0;
+            transform: translate(0, 0);
+            width: initial;
             }
           }
         }
